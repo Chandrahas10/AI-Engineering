@@ -1,5 +1,262 @@
-.venv/
-.env
+Since you're building your **AI Engineering projects in Python** and uploading them to GitHub, you should maintain a clean repository containing only the important source code, README, and required project configuration.
+
+I'll give you a reusable `.gitignore` suitable for AI Engineering, Python, LLMs, LangChain, RAG, machine learning, and data science projects.
+
+It will ignore:
+
+- Virtual environments (`.venv`, `venv`, `env`).
+- Python cache and compiled files.
+- IDE settings and editor files.
+- `.env` files and API keys.
+- Jupyter Notebook checkpoints.
+- Model weights and downloaded datasets.
+- Logs, temporary files, and build folders.
+- OS-generated files.
+
+## **1. Recommended&#x20;**`.gitignore`**&#x20;file**
+
+Create a file named exactly `.gitignore` in your project root.
+
+````
+
+# ==========================================
+# PYTHON
+# ==========================================
 __pycache__/
-*.pyc
-.vscode/.env
+*.py[cod]
+*$py.class
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+
+# ==========================================
+# VIRTUAL ENVIRONMENTS
+# ==========================================
+.venv/
+venv/
+env/
+ENV/
+virtualenv/
+.python_env/
+
+# ==========================================
+# ENVIRONMENT VARIABLES / SECRETS
+# ==========================================
+.env
+.env.*
+!.env.example
+!.env.template
+secrets/
+*.pem
+*.key
+
+# ==========================================
+# IDE AND EDITORS
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.spyderproject/
+.spyproject/
+.cursor/
+.history/
+
+# ==========================================
+# PYTHON TESTING AND TYPE CHECKING
+# ==========================================
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml/
+
+# ==========================================
+# JUPYTER NOTEBOOKS
+# ==========================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ==========================================
+# BUILD AND DISTRIBUTION
+# ==========================================
+build/
+dist/
+site/
+pip-wheel-metadata/
+wheels/
+*.whl
+
+# ==========================================
+# LOGS AND TEMPORARY FILES
+# ==========================================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ==========================================
+# AI / MACHINE LEARNING MODEL FILES
+# ==========================================
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.hdf5
+*.pb
+*.tflite
+*.pkl
+*.joblib
+
+# ==========================================
+# DATASETS AND GENERATED DATA
+# ==========================================
+/data/
+/datasets/
+/artifacts/
+/outputs/
+/checkpoints/
+*.parquet
+
+# ==========================================
+# AI EXPERIMENT TRACKING
+# ==========================================
+wandb/
+mlruns/
+lightning_logs/
+.tensorboard/
+runs/
+
+# ==========================================
+# HUGGING FACE CACHE
+# ==========================================
+.cache/
+huggingface_cache/
+transformers_cache/
+
+# ==========================================
+# NODE / FRONTEND (IF USED)
+# ==========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.next/
+out/
+
+# ==========================================
+# OPERATING SYSTEM FILES
+# ==========================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ==========================================
+# OTHER
+# ==========================================
+*.orig
+*.rej
+```
+ 
+## 2. Files you should NOT ignore
+
+Some beginners accidentally ignore important project files. Keep these in GitHub:
+
+| File | Why keep it? |
+|---|---|
+| `README.md` | Project documentation |
+| `requirements.txt` | Python dependencies |
+| `pyproject.toml` | Project configuration and dependencies |
+| `uv.lock` | Reproducible dependency versions |
+| `poetry.lock` | Reproducible dependency versions |
+| `.python-version` | Specifies Python version |
+| `.env.example` | Shows required environment variables without secrets |
+| `.gitignore` | Defines ignored files |
+
+**Important:** Don't ignore all `.toml` files or Python version files. They are useful for reproducing your AI projects on another machine.
+
+## 3. Recommended AI Engineering folder structure
+
+For your future projects, I recommend this structure:
+
+<box border radius="lg" padding={3} gap={2}>
+  <row align="center" gap={2}>
+    <icon name="folder" color="#D6A34A" size="lg"/>
+    **AI-Engineering/**
+  </row>
+  <box padding={{left:4}} gap={2}>
+    {#each [{icon:"file-text",name:"README.md",desc:"Project explanation"},{icon:"file-code",name:".gitignore",desc:"Ignored files"},{icon:"file-code",name:"requirements.txt",desc:"Dependencies"},{icon:"file-code",name:"pyproject.toml",desc:"Project configuration"},{icon:"folder",name:"week1/",desc:"Learning modules"},{icon:"folder",name:"week2/",desc:"Learning modules"},{icon:"folder",name:"projects/",desc:"AI projects"}] as item}
+      <row align="center" gap={2}>
+        <icon name={item.icon} color={item.icon==="folder"?"#D6A34A":"#6B9BD2"}/>
+        <box flex="1" gap={0}>
+          **{item.name}**
+          <caption>{item.desc}</caption>
+        </box>
+      </row>
+    {/each}
+  </box>
+</box>
+
+Inside each week, you can maintain individual Python scripts and README files.
+
+## 4. Apply `.gitignore` to your existing GitHub repository
+
+Run these commands in PowerShell from your project root:
+
+```powershell
+# Check ignored files
+git status
+
+# Add updated gitignore
+git add .gitignore
+
+# Add remaining project files
+git add .
+
+# Commit
+git commit -m "Add Python gitignore and clean project structure"
+
+# Push
+git push
+```
+
+If `.env` or other secret files were already committed, `.gitignore` alone won't remove them from Git tracking. Remove them from tracking using:
+
+```powershell
+git rm --cached .env
+```
+
+Then commit and push. Revoke any API keys that were exposed.
+
+## 5. Verify which files are ignored
+
+Use:
+
+```powershell
+git status --ignored
+```
+
+To check whether a particular file is ignored:
+
+```powershell
+git check-ignore -v .venv/
+git check-ignore -v .env
+```
+
+---
+
+**My recommendation:** Keep one reusable `.gitignore` in your main `AI-Engineering` repository. You can reuse it for all your future Python AI projects.
+
+One additional tip: Don't upload large AI models or datasets directly to GitHub. Use Git LFS or external dataset/model storage when you actually need to version them.
+````
